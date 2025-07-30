@@ -1,10 +1,14 @@
-type Props = {
+import { notFound } from "next/navigation";
+
+interface PageProps {
   params: {
     id: string;
   };
-};
+}
 
-export default async function SharePage({ params }: Props) {
+export default async function SharePage({ params }: PageProps) {
+  if (!params?.id) return notFound();
+
   const decodedId = decodeURIComponent(params.id);
   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${decodedId}.png`;
 
@@ -15,7 +19,11 @@ export default async function SharePage({ params }: Props) {
       <img
         src={imageUrl}
         alt="Ranking"
-        style={{ maxWidth: '100%', marginTop: '1rem', borderRadius: '12px' }}
+        style={{
+          maxWidth: '100%',
+          marginTop: '1rem',
+          borderRadius: '12px',
+        }}
       />
     </main>
   );
