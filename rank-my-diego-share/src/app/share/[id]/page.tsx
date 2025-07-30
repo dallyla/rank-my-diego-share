@@ -47,6 +47,7 @@ type Props = {
     };
   }
 
+  //tentativa 2
 
 // type Props = {
 //   params: { id: string[] };
@@ -90,4 +91,73 @@ type Props = {
 //       images: [imageUrl],
 //     },
 //   };
+// }
+
+
+//tentativa 3
+
+// import { Metadata, ResolvingMetadata } from 'next';
+
+// type Props = {
+//   params: {
+//     id: string;
+//   };
+// };
+
+// export async function generateMetadata(
+//   { params }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const publicId = params.id;
+//   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${publicId}.png`;
+
+//   return {
+//     title: 'Veja meu ranking!',
+//     description: 'Confira meu desempenho no Look At Me!',
+//     openGraph: {
+//       title: 'Veja meu ranking!',
+//       description: 'Confira meu desempenho no Look At Me!',
+//       images: [imageUrl],
+//       url: `https://rank-my-diego-share.vercel.app/share/${publicId}`,
+//       type: 'website',
+//     },
+//     twitter: {
+//       card: 'summary_large_image',
+//       title: 'Veja meu ranking!',
+//       description: 'Confira meu desempenho no Look At Me!',
+//       images: [imageUrl],
+//     },
+//   };
+// }
+
+// export default function SharePage({ params }: Props) {
+//   const publicId = params.id;
+//   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${publicId}.png`;
+
+//   return (
+//     <main style={{ textAlign: 'center', padding: '2rem' }}>
+//       <h1>Veja meu ranking!</h1>
+//       <p>Compartilhe com seus amigos!</p>
+//       <img
+//         src={imageUrl}
+//         alt="Ranking gerado"
+//         style={{ maxWidth: '100%', borderRadius: '12px', margin: '2rem 0' }}
+//       />
+//       <a
+//         href={imageUrl}
+//         target="_blank"
+//         rel="noopener noreferrer"
+//         style={{
+//           display: 'inline-block',
+//           padding: '0.75rem 1.5rem',
+//           background: '#6C5DD3',
+//           color: 'white',
+//           textDecoration: 'none',
+//           borderRadius: '8px',
+//         }}
+//       >
+//         Abrir imagem em tamanho real
+//       </a>
+//     </main>
+//   );
 // }
