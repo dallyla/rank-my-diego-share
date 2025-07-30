@@ -46,4 +46,48 @@ type Props = {
       },
     };
   }
-  
+
+
+// type Props = {
+//   params: { id: string[] };
+// };
+
+// export default async function Page({ params }: Props) {
+//   // 'id' agora é array, vamos juntar para formar o public_id completo
+//   const fullId = params.id.join('/'); // "rank-my-diego/rank-diego-1753909805333"
+//   const decodedId = decodeURIComponent(fullId);
+//   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${decodedId}`;
+
+//   return (
+//     <div style={{ padding: 32, textAlign: "center" }}>
+//       <h1>Meu Ranking da Diego Martins</h1>
+//       <img
+//         src={imageUrl}
+//         alt="Ranking da Diego"
+//         style={{ maxWidth: "100%", borderRadius: 12, marginTop: 16 }}
+//       />
+//     </div>
+//   );
+// }
+
+// export async function generateMetadata({ params }: Props) {
+//   const fullId = params.id.join('/');
+//   const decodedId = decodeURIComponent(fullId);
+//   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${decodedId}`;
+
+//   return {
+//     title: "Meu Ranking da Diego Martins 🎤✨",
+//     description: "Veja meu ranking das músicas favoritas!",
+//     openGraph: {
+//       title: "Meu Ranking da Diego Martins 🎤✨",
+//       description: "Veja meu ranking das músicas favoritas!",
+//       images: [imageUrl],
+//       url: `https://rank-my-diego.vercel.app/share/${encodeURIComponent(decodedId)}`,
+//       type: "website",
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       images: [imageUrl],
+//     },
+//   };
+// }
