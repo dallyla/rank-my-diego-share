@@ -1,14 +1,8 @@
-import { notFound } from "next/navigation";
-
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function SharePage({ params }: PageProps) {
-  if (!params?.id) return notFound();
-
+export default async function SharePage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const decodedId = decodeURIComponent(params.id);
   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${decodedId}.png`;
 
@@ -28,3 +22,4 @@ export default async function SharePage({ params }: PageProps) {
     </main>
   );
 }
+
