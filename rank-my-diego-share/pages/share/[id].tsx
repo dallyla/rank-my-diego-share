@@ -1,16 +1,15 @@
 // pages/share/[id].tsx
 
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { GetServerSideProps } from 'next';
 
 interface Props {
   id: string;
-  cloudinaryName: string;
+  imageUrl: string;
+  pageUrl: string;
 }
 
-export default function SharePage({ id, cloudinaryName }: Props) {
-  const imageUrl = `https://res.cloudinary.com/${cloudinaryName}/image/upload/${id}`;
-
+export default function SharePage({ id, imageUrl, pageUrl }: Props) {
   return (
     <>
       <Head>
@@ -18,13 +17,13 @@ export default function SharePage({ id, cloudinaryName }: Props) {
         <meta property="og:title" content="Meu Ranking da Diego Martins 🎤✨" />
         <meta property="og:description" content="Veja meu ranking das músicas favoritas!" />
         <meta property="og:image" content={imageUrl} />
-        <meta property="og:url" content={`https://rank-my-diego.vercel.app/share/${encodeURIComponent(id)}`} />
+        <meta property="og:url" content={pageUrl} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={imageUrl} />
       </Head>
-      <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1>Meu Ranking da Diego Martins</h1>
+
+      <main style={{ padding: '2rem', textAlign: 'center' }}>
         <img
           src={imageUrl}
           alt="Ranking"
@@ -35,19 +34,24 @@ export default function SharePage({ id, cloudinaryName }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id as string;
+export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
+  const id = params?.id;
+  const cloudName = process.env.CLOUDINARY_NAME;
 
-  if (!id) {
-    return {
-      notFound: true,
-    };
+  if (!id || typeof id !== 'string' || !cloudName) {
+    return { notFound: true };
   }
+
+  const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${id}`;
+  const host = req.headers.host;
+  const protocol = host?.includes('localhost') ? 'http' : 'https';
+  const pageUrl = `${protocol}://${host}/share/${encodeURIComponent(id)}`;
 
   return {
     props: {
       id,
-      cloudinaryName: process.env.CLOUDINARY_NAME || '',
+      imageUrl,
+      pageUrl,
     },
   };
 };
