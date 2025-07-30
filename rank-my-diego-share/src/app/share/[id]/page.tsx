@@ -1,8 +1,4 @@
-export default async function SharePage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function SharePage({ params }: { params: { id: string } }) {
   const decodedId = decodeURIComponent(params.id);
   const imageUrl = `https://res.cloudinary.com/dqon7a1wv/image/upload/${decodedId}.png`;
 
